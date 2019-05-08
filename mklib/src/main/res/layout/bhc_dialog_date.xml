@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aigestudio="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/drawable_common_rounded_white_bg"
+    android:gravity="center"
+    android:orientation="vertical">
+
+
+    <com.itheima.wheelpicker.widgets.WheelDatePicker
+        android:id="@+id/wheelDatePicker"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp" />
+
+    <com.itheima.wheelpicker.widgets.WheelYearPicker
+        android:id="@+id/wheelYearPicker"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:visibility="gone"
+        aigestudio:wheel_atmospheric="true"
+        aigestudio:wheel_curved="true"
+        aigestudio:wheel_cyclic="true"
+        aigestudio:wheel_item_align="center"
+        aigestudio:wheel_item_text_color="#646464"
+        aigestudio:wheel_item_text_size="18sp"
+        aigestudio:wheel_selected_item_text_color="#0e0e0e" />
+
+    <com.itheima.wheelpicker.widgets.WheelMonthPicker
+        android:id="@+id/wheelMonthPicker"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:visibility="gone"
+        aigestudio:wheel_atmospheric="true"
+        aigestudio:wheel_curved="true"
+        aigestudio:wheel_cyclic="true"
+        aigestudio:wheel_item_align="center"
+        aigestudio:wheel_item_text_color="#646464"
+        aigestudio:wheel_item_text_size="18sp"
+        aigestudio:wheel_selected_item_text_color="#0e0e0e" />
+
+    <com.itheima.wheelpicker.widgets.WheelDayPicker
+        android:id="@+id/wheelDayPicker"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:visibility="gone"
+        aigestudio:wheel_atmospheric="true"
+        aigestudio:wheel_curved="true"
+        aigestudio:wheel_cyclic="true"
+        aigestudio:wheel_item_align="center"
+        aigestudio:wheel_item_text_color="#646464"
+        aigestudio:wheel_item_text_size="18sp"
+        aigestudio:wheel_selected_item_text_color="#0e0e0e" />
+
+    <com.itheima.wheelpicker.WheelPicker
+        android:id="@+id/wheelPicker"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:visibility="gone"
+        aigestudio:wheel_atmospheric="true"
+        aigestudio:wheel_curved="true"
+        aigestudio:wheel_cyclic="true"
+        aigestudio:wheel_item_align="center"
+        aigestudio:wheel_item_text_color="#646464"
+        aigestudio:wheel_item_text_size="18sp"
+        aigestudio:wheel_selected_item_text_color="#0e0e0e" />
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#E5E5E5" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/cancel_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@null"
+            android:text="取消" />
+
+        <Button
+            android:id="@+id/confirm_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@null"
+            android:text="确定"
+            android:textColor="@color/blue" />
+
+
+    </LinearLayout>
+
+</LinearLayout>
