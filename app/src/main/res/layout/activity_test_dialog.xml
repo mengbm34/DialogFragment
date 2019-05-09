@@ -16,11 +16,19 @@
         android:text="confirm" />
 
     <Button
+        android:id="@+id/single_confirm_dialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:text="Single_confirm" />
+
+    <Button
         android:id="@+id/confirm_with_image_dialog"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
-        android:text="confirmWithImage" />
+        android:text="confirmWithImage"
+        android:visibility="gone" />
 
     <Button
         android:id="@+id/webview_dialog"
@@ -42,6 +50,14 @@
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
         android:text="edit_Tel" />
+
+    <Button
+        android:id="@+id/loading_dialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:text="loading" />
+
 
     <Button
         android:id="@+id/date_dialog"

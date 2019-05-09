@@ -1,8 +1,18 @@
 <resources>
+
     <style name="DialogBaseAnimation">
         <item name="android:windowEnterAnimation">@anim/dialog_enter</item>
         <item name="android:windowExitAnimation">@anim/dialog_out</item>
     </style>
 
+
+    <style name="dialogLoading">
+        <item name="android:indeterminate">true</item>
+        <item name="android:indeterminateDuration">2000</item>
+        <item name="android:indeterminateOnly">true</item>
+        <item name="android:indeterminateDrawable">
+            @drawable/drawable_dialog_loading_progressbar_style
+        </item>
+    </style>
 
 </resources>

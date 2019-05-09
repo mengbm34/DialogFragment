@@ -1,14 +1,17 @@
 package com.mk.dialogfragmentdemo;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
 import com.mk.mklib.dialog.BHCBaseDialogFragment;
 import com.mk.mklib.dialog.BHCCommonConfirmDialog;
+import com.mk.mklib.dialog.BHCCommonLoadingDialog;
 import com.mk.mklib.dialog.BHCConfirmWithImageDialog;
 import com.mk.mklib.dialog.BHCCommonInputDialog;
 import com.mk.mklib.dialog.BHCWithWebViewDialog;
@@ -25,16 +28,17 @@ import java.util.List;
 public class TestDialogActivity extends AppCompatActivity {
 
     Button btn_confirm;
+    Button btn_single_confirm_dialog;
     Button btn_confirm_with_image;
     Button btn_webview;
     Button btn_edit;
     Button btn_edit_tel;
+    Button btn_loading_dialog;
     Button btn_date;
     Button btn_year;
     Button btn_month;
     Button btn_day;
     Button btn_common;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,10 +46,12 @@ public class TestDialogActivity extends AppCompatActivity {
         setContentView(R.layout.activity_test_dialog);
 
         btn_confirm = findViewById(R.id.confirm_dialog);
+        btn_single_confirm_dialog = findViewById(R.id.single_confirm_dialog);
         btn_confirm_with_image = findViewById(R.id.confirm_with_image_dialog);
         btn_webview = findViewById(R.id.webview_dialog);
         btn_edit = findViewById(R.id.edit_dialog);
         btn_edit_tel = findViewById(R.id.edit_tel_dialog);
+        btn_loading_dialog = findViewById(R.id.loading_dialog);
         btn_date = findViewById(R.id.date_dialog);
         btn_year = findViewById(R.id.year_dialog);
         btn_month = findViewById(R.id.month_dialog);
@@ -104,6 +110,28 @@ public class TestDialogActivity extends AppCompatActivity {
             }
         });
 
+        //确认dialog
+        btn_single_confirm_dialog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                BHCCommonConfirmDialog.newConfirmBuilder()
+                        .setTitle("短标题")//标题不设置默认隐藏
+                        .setRightText("确认")
+                        .setMessage("短内容")
+                        .setIsShowLeftBtn(false)
+                        .build()
+                        //点击确认/取消回调监听
+                        .setDialogResultListener(new BHCBaseDialogFragment.DialogResultListener<String>() {
+                            @Override
+                            public void result(String result) {
+                                Toast.makeText(TestDialogActivity.this, "你点击了" + result, Toast.LENGTH_SHORT).show();
+                                Log.i("mk","mkmkmkmkmkmkmkmk");
+                            }
+                        })
+                        .show(getSupportFragmentManager(), "confirmDialog");
+            }
+        });
+
 
         btn_confirm_with_image.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -124,7 +152,7 @@ public class TestDialogActivity extends AppCompatActivity {
                         .setTitle("联系方式")
                         .setIsShowLastEdit(false)
                         .setSize((int) (ScreenUtils.getScreenWidth(TestDialogActivity.this) * 0.8),
-                                DensityUtils.dip2px(TestDialogActivity.this, 150))
+                                DensityUtils.dip2px(TestDialogActivity.this, 200))
                         .build()
                         .setDialogResultListener(new BHCBaseDialogFragment.DialogResultListener<String>() {
                             @Override
@@ -154,7 +182,7 @@ public class TestDialogActivity extends AppCompatActivity {
                         .setTitle("请输入联系人方式")
                         .setIsShowLastEdit(true)
                         .setSize((int) (ScreenUtils.getScreenWidth(TestDialogActivity.this) * 0.8),
-                                DensityUtils.dip2px(TestDialogActivity.this, 150))
+                                DensityUtils.dip2px(TestDialogActivity.this, 200))
                         .build()
                         .setDialogResultListener(new BHCBaseDialogFragment.DialogResultListener<String>() {
                             @Override
@@ -173,6 +201,28 @@ public class TestDialogActivity extends AppCompatActivity {
                         .show(getSupportFragmentManager(), "inputDialog");
             }
         });
+
+        /**
+         * 加载进度dialog
+         */
+        btn_loading_dialog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final BHCCommonLoadingDialog loadingDialog = BHCCommonLoadingDialog.newBHCCommonLoadingDialog().build();
+
+
+                loadingDialog.show(getSupportFragmentManager(), "BHCCommonLoadingDialog");
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        loadingDialog.dismiss();
+                    }
+                }, 2000);
+
+
+            }
+        });
+
 
         //年月日dialog
         btn_date.setOnClickListener(new View.OnClickListener() {
