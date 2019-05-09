@@ -48,6 +48,7 @@ public class BHCWithWebViewDialog extends BHCBaseDialogFragment {
             @Override
             public void onClick(View view) {
                 if (mDialogDismissListener != null) {
+                    mDialogDismissListener.dismiss();
                     dismiss();
                 }
             }

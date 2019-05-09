@@ -93,17 +93,18 @@ public class TestDialogActivity extends AppCompatActivity {
                         .setRightText("立即更新")
                         .setMessage("发现新版本")
                         .build()
-                        //点击确认/取消回调监听
+                        //点击确认回调监听
                         .setDialogResultListener(new BHCBaseDialogFragment.DialogResultListener<String>() {
                             @Override
                             public void result(String result) {
-                                Toast.makeText(TestDialogActivity.this, "你点击了" + result, Toast.LENGTH_SHORT).show();
+                                Toast.makeText(TestDialogActivity.this, "你点击了立即更新", Toast.LENGTH_SHORT).show();
                             }
                         })
-                        //关闭dialogfragment回调
+                        //取消回调监听
                         .setDialogDismissListener(new BHCBaseDialogFragment.DialogDismissListener() {
                             @Override
                             public void dismiss() {
+                                Toast.makeText(TestDialogActivity.this, "你点击了暂不更新", Toast.LENGTH_SHORT).show();
                             }
                         })
                         .show(getSupportFragmentManager(), "confirmDialog");
@@ -125,7 +126,7 @@ public class TestDialogActivity extends AppCompatActivity {
                             @Override
                             public void result(String result) {
                                 Toast.makeText(TestDialogActivity.this, "你点击了" + result, Toast.LENGTH_SHORT).show();
-                                Log.i("mk","mkmkmkmkmkmkmkmk");
+                                Log.i("mk", "mkmkmkmkmkmkmkmk");
                             }
                         })
                         .show(getSupportFragmentManager(), "confirmDialog");
@@ -149,7 +150,9 @@ public class TestDialogActivity extends AppCompatActivity {
             public void onClick(View v) {
                 BHCCommonInputDialog.newInputBuilder()
                         .setHint("请输入...")
-                        .setTitle("联系方式")
+                        .setTitle("标题")
+                        .setIsShowSubTitle(true)
+                        .setSubTitle("hahahahahaha")
                         .setIsShowLastEdit(false)
                         .setSize((int) (ScreenUtils.getScreenWidth(TestDialogActivity.this) * 0.8),
                                 DensityUtils.dip2px(TestDialogActivity.this, 200))
@@ -210,7 +213,6 @@ public class TestDialogActivity extends AppCompatActivity {
             public void onClick(View v) {
                 final BHCCommonLoadingDialog loadingDialog = BHCCommonLoadingDialog.newBHCCommonLoadingDialog().build();
 
-
                 loadingDialog.show(getSupportFragmentManager(), "BHCCommonLoadingDialog");
                 new Handler().postDelayed(new Runnable() {
                     @Override
@@ -218,6 +220,7 @@ public class TestDialogActivity extends AppCompatActivity {
                         loadingDialog.dismiss();
                     }
                 }, 2000);
+
 
 
             }

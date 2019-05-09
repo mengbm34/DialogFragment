@@ -59,6 +59,7 @@ public class BHCCommonConfirmDialog extends BHCBaseDialogFragment {
                     @Override
                     public void onClick(View view) {
                         if (mDialogDismissListener != null) {
+                            mDialogDismissListener.dismiss();
                             dismiss();
                         }
                     }
@@ -69,7 +70,7 @@ public class BHCCommonConfirmDialog extends BHCBaseDialogFragment {
                 @Override
                 public void onClick(View view) {
                     if (mDialogResultListener != null) {
-                        mDialogResultListener.result(confirmBtn.getText().toString());
+                        mDialogResultListener.result("");
                         dismiss();
                     }
                 }

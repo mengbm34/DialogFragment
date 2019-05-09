@@ -28,7 +28,9 @@ public class BHCCommonInputDialog extends BHCBaseDialogFragment {
         bundle.putString("hint", builder.mHint);
         bundle.putString("hint1", builder.mHint1);
         bundle.putString("title", builder.title);
+        bundle.putString("subTitle", builder.subTitle);
         bundle.putBoolean("isShow", builder.isShowlastEdit);
+        bundle.putBoolean("isShowSubTitle", builder.isShowSubTitle);
         dialog.setArguments(bundle);
         return dialog;
     }
@@ -38,7 +40,9 @@ public class BHCCommonInputDialog extends BHCBaseDialogFragment {
         private String mHint;
         private String mHint1;
         private String title;
+        private String subTitle;
         private Boolean isShowlastEdit = false;
+        private Boolean isShowSubTitle = false;
 
         public Builder setHint(String hint) {
             mHint = hint;
@@ -55,8 +59,18 @@ public class BHCCommonInputDialog extends BHCBaseDialogFragment {
             return this;
         }
 
+        public Builder setSubTitle(String subTitle) {
+            this.subTitle = subTitle;
+            return this;
+        }
+
         public Builder setIsShowLastEdit(Boolean isShowLastEdit) {
             this.isShowlastEdit = isShowLastEdit;
+            return this;
+        }
+
+        public Builder setIsShowSubTitle(Boolean isShowSubTitle) {
+            this.isShowSubTitle = isShowSubTitle;
             return this;
         }
 
@@ -76,6 +90,7 @@ public class BHCCommonInputDialog extends BHCBaseDialogFragment {
 
     private void initView(View view) {
         TextView title = view.findViewById(R.id.tv_title);
+        TextView sub_title = view.findViewById(R.id.tv_subtitle);
         final EditText et_1 = view.findViewById(R.id.et_1);
         final EditText et_2 = view.findViewById(R.id.et_2);
         Button cancelBtn = view.findViewById(R.id.cancel_btn);
@@ -89,6 +104,10 @@ public class BHCCommonInputDialog extends BHCBaseDialogFragment {
             et_1.setHint(getArguments().getString("hint"));
             et_2.setHint(getArguments().getString("hint1"));
 
+            if (getArguments().getBoolean("isShowSubTitle")) {
+                sub_title.setVisibility(View.VISIBLE);
+                sub_title.setText(getArguments().getString("subTitle"));
+            }
             if (getArguments().getBoolean("isShow")) {
                 et_2.setVisibility(View.VISIBLE);
             }
@@ -97,6 +116,7 @@ public class BHCCommonInputDialog extends BHCBaseDialogFragment {
                 @Override
                 public void onClick(View view) {
                     if (mDialogDismissListener != null) {
+                        mDialogDismissListener.dismiss();
                         dismiss();
                     }
                 }
