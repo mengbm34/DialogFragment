@@ -4,18 +4,17 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
 import com.mk.mklib.dialog.BHCBaseDialogFragment;
 import com.mk.mklib.dialog.BHCCommonConfirmDialog;
+import com.mk.mklib.dialog.BHCCommonInputDialog;
 import com.mk.mklib.dialog.BHCCommonLoadingDialog;
 import com.mk.mklib.dialog.BHCConfirmWithImageDialog;
-import com.mk.mklib.dialog.BHCCommonInputDialog;
-import com.mk.mklib.dialog.BHCWithWebViewDialog;
 import com.mk.mklib.dialog.BHCDateDialog;
+import com.mk.mklib.dialog.BHCWithWebViewDialog;
 import com.mk.mklib.utils.DensityUtils;
 import com.mk.mklib.utils.ScreenUtils;
 
@@ -79,7 +78,7 @@ public class TestDialogActivity extends AppCompatActivity {
 
                             }
                         })
-                        .show(getSupportFragmentManager(), "withwebviewdialog");
+                        .show(getSupportFragmentManager());
             }
         });
 
@@ -87,19 +86,20 @@ public class TestDialogActivity extends AppCompatActivity {
         btn_confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                BHCCommonConfirmDialog.newConfirmBuilder()
+                BHCCommonConfirmDialog dialog = BHCCommonConfirmDialog.newConfirmBuilder()
+                        .setCanceledOnTouchOutside(true)
                         .setTitle("提示")//标题不设置默认隐藏
                         .setLeftText("暂不更新")
                         .setRightText("立即更新")
                         .setMessage("发现新版本")
-                        .build()
-                        //点击确认回调监听
-                        .setDialogResultListener(new BHCBaseDialogFragment.DialogResultListener<String>() {
-                            @Override
-                            public void result(String result) {
-                                Toast.makeText(TestDialogActivity.this, "你点击了立即更新", Toast.LENGTH_SHORT).show();
-                            }
-                        })
+                        .build();
+                //点击确认回调监听
+                dialog.setDialogResultListener(new BHCBaseDialogFragment.DialogResultListener<String>() {
+                    @Override
+                    public void result(String result) {
+                        Toast.makeText(TestDialogActivity.this, "你点击了立即更新", Toast.LENGTH_SHORT).show();
+                    }
+                })
                         //取消回调监听
                         .setDialogDismissListener(new BHCBaseDialogFragment.DialogDismissListener() {
                             @Override
@@ -107,7 +107,8 @@ public class TestDialogActivity extends AppCompatActivity {
                                 Toast.makeText(TestDialogActivity.this, "你点击了暂不更新", Toast.LENGTH_SHORT).show();
                             }
                         })
-                        .show(getSupportFragmentManager(), "confirmDialog");
+                        .show(getSupportFragmentManager());
+
             }
         });
 
@@ -126,10 +127,10 @@ public class TestDialogActivity extends AppCompatActivity {
                             @Override
                             public void result(String result) {
                                 Toast.makeText(TestDialogActivity.this, "你点击了" + result, Toast.LENGTH_SHORT).show();
-                                Log.i("mk", "mkmkmkmkmkmkmkmk");
                             }
                         })
-                        .show(getSupportFragmentManager(), "confirmDialog");
+                        .show(getSupportFragmentManager());
+
             }
         });
 
@@ -140,7 +141,7 @@ public class TestDialogActivity extends AppCompatActivity {
                 BHCConfirmWithImageDialog.newConfirmBuilder()
                         .setBtnText("按钮")
                         .build()
-                        .show(getSupportFragmentManager(), "confirmwithimageDialog");
+                        .show(getSupportFragmentManager());
             }
         });
 
@@ -212,17 +213,16 @@ public class TestDialogActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 final BHCCommonLoadingDialog loadingDialog = BHCCommonLoadingDialog.newBHCCommonLoadingDialog().build();
-
                 loadingDialog.show(getSupportFragmentManager(), "BHCCommonLoadingDialog");
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        loadingDialog.dismiss();
-                    }
-                }, 2000);
 
-
-
+                if (loadingDialog.getDialog().isShowing()) {
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            loadingDialog.dismiss();
+                        }
+                    }, 2000);
+                }
             }
         });
 

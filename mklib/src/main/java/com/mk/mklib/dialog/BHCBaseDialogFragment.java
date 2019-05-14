@@ -7,12 +7,12 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
-
 
 import com.mk.mklib.R;
 import com.mk.mklib.utils.DensityUtils;
@@ -32,7 +32,9 @@ public abstract class BHCBaseDialogFragment extends DialogFragment {
     private int mGravity = CENTER;
     private int mOffsetX = 0;
     private int mOffsetY = 0;
+    private String mTag = "";
     private int mAnimation = R.style.DialogBaseAnimation;
+    private boolean mCanceledOnTouchOutside = false;
     protected DialogResultListener mDialogResultListener;
     protected DialogDismissListener mDialogDismissListener;
 
@@ -45,6 +47,8 @@ public abstract class BHCBaseDialogFragment extends DialogFragment {
         bundle.putInt("mOffsetX", b.mOffsetX);
         bundle.putInt("mOffsetY", b.mOffsetY);
         bundle.putInt("mAnimation", b.mAnimation);
+        bundle.putBoolean("mCanceledOnTouchOutside", b.mCanceledOnTouchOutside);
+        bundle.putString("mTag", b.mTag);
         return bundle;
     }
 
@@ -59,6 +63,8 @@ public abstract class BHCBaseDialogFragment extends DialogFragment {
             mOffsetY = getArguments().getInt("mOffsetY");
             mAnimation = getArguments().getInt("mAnimation");
             mGravity = getArguments().getInt("mGravity");
+            mCanceledOnTouchOutside = getArguments().getBoolean("mCanceledOnTouchOutside");
+            mTag = getArguments().getString("mTag");
         }
     }
 
@@ -79,6 +85,14 @@ public abstract class BHCBaseDialogFragment extends DialogFragment {
     }
 
     /**
+     * 显示dialogFragment
+     * @param fragmentManager
+     */
+    public void show(FragmentManager fragmentManager) {
+        show(fragmentManager, mTag);
+    }
+
+    /**
      * 设置统一样式
      */
     private void setStyle() {
@@ -86,6 +100,7 @@ public abstract class BHCBaseDialogFragment extends DialogFragment {
         getDialog().requestWindowFeature(STYLE_NO_TITLE);//无标题
         Objects.requireNonNull(getDialog().getWindow()).setBackgroundDrawable(
                 new ColorDrawable(Color.TRANSPARENT));//透明背景
+        getDialog().setCanceledOnTouchOutside(mCanceledOnTouchOutside);
         //设置宽高
         assert window != null;
         window.getDecorView().setPadding(0, 0, 0, 0);
@@ -100,9 +115,8 @@ public abstract class BHCBaseDialogFragment extends DialogFragment {
         //设置动画
         window.setWindowAnimations(mAnimation);
         window.setAttributes(lp);
-
-
     }
+
 
     //由子类来实现布局
     protected abstract View setView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState);
@@ -125,6 +139,8 @@ public abstract class BHCBaseDialogFragment extends DialogFragment {
         private int mOffsetX = 0;
         private int mOffsetY = 0;
         private int mAnimation = R.style.DialogBaseAnimation;
+        private boolean mCanceledOnTouchOutside = false;
+        private String mTag = "";
 
         public T setSize(int mWidth, int mHeight) {
             this.mWidth = mWidth;
@@ -152,15 +168,18 @@ public abstract class BHCBaseDialogFragment extends DialogFragment {
             return (T) this;
         }
 
+        public T setCanceledOnTouchOutside(boolean mCanceledOnTouchOutside) {
+            this.mCanceledOnTouchOutside = mCanceledOnTouchOutside;
+            return (T) this;
+        }
+
+        public T setTag(String mTag) {
+            this.mTag = mTag;
+            return (T) this;
+        }
+
         public abstract D build();
 
-//        protected void clear() {
-//            this.mWidth = WRAP_CONTENT;
-//            this.mHeight = WRAP_CONTENT;
-//            this.mGravity = CENTER;
-//            this.mOffsetX = 0;
-//            this.mOffsetY = 0;
-//        }
     }
 
 

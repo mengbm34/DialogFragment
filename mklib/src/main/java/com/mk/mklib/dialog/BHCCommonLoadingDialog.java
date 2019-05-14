@@ -1,6 +1,5 @@
 package com.mk.mklib.dialog;
 
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,21 +10,20 @@ import com.mk.mklib.R;
 
 /**
  * created by mbm on 2019/5/6
+ * 加载弹框
  */
 public class BHCCommonLoadingDialog extends BHCBaseDialogFragment {
 
 
     @Override
     protected View setView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.bhc_dialog_loading, container, false);
-        return view;
+        return inflater.inflate(R.layout.bhc_dialog_loading, container, false);
     }
 
 
     private static BHCCommonLoadingDialog getInstance(Builder builder) {
         BHCCommonLoadingDialog dialog = new BHCCommonLoadingDialog();
         Bundle bundle = getArgumentBundle(builder);
-
         dialog.setArguments(bundle);
         return dialog;
     }
@@ -41,11 +39,4 @@ public class BHCCommonLoadingDialog extends BHCBaseDialogFragment {
             return BHCCommonLoadingDialog.getInstance(this);
         }
     }
-
-    //取消dialog
-    public void loadingDialogDimiss() {
-        onDismiss(getDialog());
-        dismiss();
-    }
-
 }

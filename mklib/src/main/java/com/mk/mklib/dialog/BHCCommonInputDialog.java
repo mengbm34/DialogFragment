@@ -29,7 +29,7 @@ public class BHCCommonInputDialog extends BHCBaseDialogFragment {
         bundle.putString("hint1", builder.mHint1);
         bundle.putString("title", builder.title);
         bundle.putString("subTitle", builder.subTitle);
-        bundle.putBoolean("isShow", builder.isShowlastEdit);
+        bundle.putBoolean("isShow", builder.isShowLastEdit);
         bundle.putBoolean("isShowSubTitle", builder.isShowSubTitle);
         dialog.setArguments(bundle);
         return dialog;
@@ -41,7 +41,7 @@ public class BHCCommonInputDialog extends BHCBaseDialogFragment {
         private String mHint1;
         private String title;
         private String subTitle;
-        private Boolean isShowlastEdit = false;
+        private Boolean isShowLastEdit = false;
         private Boolean isShowSubTitle = false;
 
         public Builder setHint(String hint) {
@@ -65,7 +65,7 @@ public class BHCCommonInputDialog extends BHCBaseDialogFragment {
         }
 
         public Builder setIsShowLastEdit(Boolean isShowLastEdit) {
-            this.isShowlastEdit = isShowLastEdit;
+            this.isShowLastEdit = isShowLastEdit;
             return this;
         }
 

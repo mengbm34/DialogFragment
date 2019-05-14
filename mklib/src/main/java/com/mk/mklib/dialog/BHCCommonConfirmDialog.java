@@ -1,6 +1,7 @@
 package com.mk.mklib.dialog;
 
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,14 +21,12 @@ public class BHCCommonConfirmDialog extends BHCBaseDialogFragment {
     private static final String RIGHT_TEXT = "right_text";
     private static final String TITLE = "title";
     private static final String MESSAGE = "message";
-
-    private static final String ISSHOW_LEFT_BTN = "is_show_left_btn";
+    private static final String IS_SHOW_LEFT_BTN = "is_show_left_btn";
 
     @Override
 
     protected View setView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.bhc_dialog_common_confirm, container, false);
-
         initView(view);
 
         return view;
@@ -51,7 +50,7 @@ public class BHCCommonConfirmDialog extends BHCBaseDialogFragment {
             confirmBtn.setText(getArguments().getString(RIGHT_TEXT));
             cancelBtn.setText(getArguments().getString(LEFT_TEXT));
             //判断是否需要隐藏其中一个按钮
-            if (!getArguments().getBoolean(ISSHOW_LEFT_BTN)) {
+            if (!getArguments().getBoolean(IS_SHOW_LEFT_BTN)) {
                 cancelBtn.setVisibility(View.GONE);
             } else {
                 cancelBtn.setVisibility(View.VISIBLE);
@@ -59,7 +58,6 @@ public class BHCCommonConfirmDialog extends BHCBaseDialogFragment {
                     @Override
                     public void onClick(View view) {
                         if (mDialogDismissListener != null) {
-                            mDialogDismissListener.dismiss();
                             dismiss();
                         }
                     }
@@ -79,6 +77,7 @@ public class BHCCommonConfirmDialog extends BHCBaseDialogFragment {
 
     }
 
+
     private static BHCCommonConfirmDialog getInstance(Builder builder) {
         BHCCommonConfirmDialog dialog = new BHCCommonConfirmDialog();
         Bundle bundle = getArgumentBundle(builder);
@@ -86,7 +85,7 @@ public class BHCCommonConfirmDialog extends BHCBaseDialogFragment {
         bundle.putString(RIGHT_TEXT, builder.rightText);
         bundle.putString(TITLE, builder.mTitle);
         bundle.putString(MESSAGE, builder.mMessage);
-        bundle.putBoolean(ISSHOW_LEFT_BTN, builder.isShowLeftBtn);
+        bundle.putBoolean(IS_SHOW_LEFT_BTN, builder.isShowLeftBtn);
         dialog.setArguments(bundle);
         return dialog;
     }
