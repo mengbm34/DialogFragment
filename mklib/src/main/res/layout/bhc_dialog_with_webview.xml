@@ -34,7 +34,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:orientation="horizontal">
 
         <Button
@@ -43,11 +43,10 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
             android:layout_marginEnd="30dp"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="10dp"
             android:layout_weight="1"
-            android:background="@drawable/drawable_common_rounded_gray_bg"
-            android:text="不同意"
-            android:textColor="@color/white" />
+            android:background="@null"
+            android:text="不同意" />
 
         <Button
             android:id="@+id/confirm_btn"
@@ -55,11 +54,11 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
             android:layout_marginEnd="30dp"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="10dp"
             android:layout_weight="1"
-            android:background="@drawable/drawable_common_rounded_bule_bg"
+            android:background="@null"
             android:text="同意"
-            android:textColor="@color/white" />
+            android:textColor="@color/blue" />
 
 
     </LinearLayout>

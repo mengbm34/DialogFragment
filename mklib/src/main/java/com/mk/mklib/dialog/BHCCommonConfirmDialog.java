@@ -1,7 +1,6 @@
 package com.mk.mklib.dialog;
 
 import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,14 +13,16 @@ import com.mk.mklib.R;
 
 /**
  * created by mbm on 2019/5/6
+ * 确认/取消弹框
  */
 public class BHCCommonConfirmDialog extends BHCBaseDialogFragment {
 
-    private static final String LEFT_TEXT = "left_text";
-    private static final String RIGHT_TEXT = "right_text";
     private static final String TITLE = "title";
     private static final String MESSAGE = "message";
     private static final String IS_SHOW_LEFT_BTN = "is_show_left_btn";
+
+    private static final String CONFIRM_BTN_TEXT = "confirm_btn_text";
+    private static final String CANCEL_BTN_TEXT = "cancle_btn_text";
 
     @Override
 
@@ -47,8 +48,8 @@ public class BHCCommonConfirmDialog extends BHCBaseDialogFragment {
                 messageTv.setText(getArguments().getString(MESSAGE));
             }
 
-            confirmBtn.setText(getArguments().getString(RIGHT_TEXT));
-            cancelBtn.setText(getArguments().getString(LEFT_TEXT));
+            confirmBtn.setText(getArguments().getString(CONFIRM_BTN_TEXT));
+            cancelBtn.setText(getArguments().getString(CANCEL_BTN_TEXT));
             //判断是否需要隐藏其中一个按钮
             if (!getArguments().getBoolean(IS_SHOW_LEFT_BTN)) {
                 cancelBtn.setVisibility(View.GONE);
@@ -57,9 +58,7 @@ public class BHCCommonConfirmDialog extends BHCBaseDialogFragment {
                 cancelBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if (mDialogDismissListener != null) {
-                            dismiss();
-                        }
+                        dismiss();
                     }
                 });
             }
@@ -67,8 +66,8 @@ public class BHCCommonConfirmDialog extends BHCBaseDialogFragment {
             confirmBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if (mDialogResultListener != null) {
-                        mDialogResultListener.result("");
+                    if (mDialogConfirmListener != null) {
+                        mDialogConfirmListener.result("");
                         dismiss();
                     }
                 }
@@ -81,8 +80,8 @@ public class BHCCommonConfirmDialog extends BHCBaseDialogFragment {
     private static BHCCommonConfirmDialog getInstance(Builder builder) {
         BHCCommonConfirmDialog dialog = new BHCCommonConfirmDialog();
         Bundle bundle = getArgumentBundle(builder);
-        bundle.putString(LEFT_TEXT, builder.leftText);
-        bundle.putString(RIGHT_TEXT, builder.rightText);
+        bundle.putString(CANCEL_BTN_TEXT, builder.cancelBtnText);
+        bundle.putString(CONFIRM_BTN_TEXT, builder.confirmBtnText);
         bundle.putString(TITLE, builder.mTitle);
         bundle.putString(MESSAGE, builder.mMessage);
         bundle.putBoolean(IS_SHOW_LEFT_BTN, builder.isShowLeftBtn);
@@ -97,8 +96,8 @@ public class BHCCommonConfirmDialog extends BHCBaseDialogFragment {
     public static class Builder extends BHCBaseDialogFragment.Builder<Builder, BHCCommonConfirmDialog> {
         private String mTitle = "";
         private String mMessage;
-        private String leftText = "取消";
-        private String rightText = "确定";
+        private String cancelBtnText = "取消";
+        private String confirmBtnText = "确定";
         private Boolean isShowLeftBtn = true;
 
         public Builder setTitle(String title) {
@@ -111,13 +110,13 @@ public class BHCCommonConfirmDialog extends BHCBaseDialogFragment {
             return this;
         }
 
-        public Builder setLeftText(String leftText) {
-            this.leftText = leftText;
+        public Builder setCancelBtnText(String cancelBtnText) {
+            this.cancelBtnText = cancelBtnText;
             return this;
         }
 
-        public Builder setRightText(String rightText) {
-            this.rightText = rightText;
+        public Builder setConfirmBtnText(String confirmBtnText) {
+            this.confirmBtnText = confirmBtnText;
             return this;
         }
 

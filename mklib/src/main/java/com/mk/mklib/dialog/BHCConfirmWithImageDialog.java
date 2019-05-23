@@ -25,7 +25,7 @@ public class BHCConfirmWithImageDialog extends BHCBaseDialogFragment {
             btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (mDialogResultListener != null) {
+                    if (mDialogConfirmListener != null) {
                         dismiss();
                     }
                 }

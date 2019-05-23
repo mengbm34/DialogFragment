@@ -35,8 +35,8 @@ public abstract class BHCBaseDialogFragment extends DialogFragment {
     private String mTag = "";
     private int mAnimation = R.style.DialogBaseAnimation;
     private boolean mCanceledOnTouchOutside = false;
-    protected DialogResultListener mDialogResultListener;
-    protected DialogDismissListener mDialogDismissListener;
+    protected DialogConfirmListener mDialogConfirmListener;
+    protected DialogCancelListener mDialogCancelListener;
 
 
     protected static Bundle getArgumentBundle(Builder b) {
@@ -79,13 +79,14 @@ public abstract class BHCBaseDialogFragment extends DialogFragment {
     @Override
     public void onDismiss(DialogInterface dialog) {
         super.onDismiss(dialog);
-        if (mDialogDismissListener != null) {
-            mDialogDismissListener.dismiss();
-        }
+//        if (mDialogCancelListener != null) {
+//            mDialogCancelListener.dismiss();
+//        }
     }
 
     /**
      * 显示dialogFragment
+     *
      * @param fragmentManager
      */
     public void show(FragmentManager fragmentManager) {
@@ -121,13 +122,13 @@ public abstract class BHCBaseDialogFragment extends DialogFragment {
     //由子类来实现布局
     protected abstract View setView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState);
 
-    public BHCBaseDialogFragment setDialogResultListener(DialogResultListener dialogResultListener) {
-        this.mDialogResultListener = dialogResultListener;
+    public BHCBaseDialogFragment setDialogConfirmListener(DialogConfirmListener dialogConfirmListener) {
+        this.mDialogConfirmListener = dialogConfirmListener;
         return this;
     }
 
-    public BHCBaseDialogFragment setDialogDismissListener(DialogDismissListener dialogDismissListener) {
-        this.mDialogDismissListener = dialogDismissListener;
+    public BHCBaseDialogFragment setDialogCancelListener(DialogCancelListener dialogCancelListener) {
+        this.mDialogCancelListener = dialogCancelListener;
         return this;
     }
 
@@ -188,14 +189,14 @@ public abstract class BHCBaseDialogFragment extends DialogFragment {
      *
      * @param <T>
      */
-    public interface DialogResultListener<T> {
+    public interface DialogConfirmListener<T> {
         void result(T result);
     }
 
     /**
      * 关闭dialog回调
      */
-    public interface DialogDismissListener {
+    public interface DialogCancelListener {
         void dismiss();
     }
 

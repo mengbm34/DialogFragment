@@ -115,20 +115,17 @@ public class BHCCommonInputDialog extends BHCBaseDialogFragment {
             cancelBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if (mDialogDismissListener != null) {
-                        mDialogDismissListener.dismiss();
-                        dismiss();
-                    }
+                    dismiss();
                 }
             });
             confirmBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if (mDialogResultListener != null) {
+                    if (mDialogConfirmListener != null) {
                         if (getArguments().getBoolean("isShow")) {
-                            mDialogResultListener.result(et_1.getText().toString().trim() + et_2.getText().toString().trim());
+                            mDialogConfirmListener.result(et_1.getText().toString().trim() + et_2.getText().toString().trim());
                         } else {
-                            mDialogResultListener.result(et_1.getText().toString().trim());
+                            mDialogConfirmListener.result(et_1.getText().toString().trim());
                         }
 
                         dismiss();

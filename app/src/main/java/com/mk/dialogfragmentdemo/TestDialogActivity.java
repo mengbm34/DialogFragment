@@ -62,17 +62,17 @@ public class TestDialogActivity extends AppCompatActivity {
             public void onClick(View v) {
                 BHCWithWebViewDialog.newWithWebViewDialog()
                         .setTitle("条款公约")
-                        .setRightText("同意")
-                        .setLeftText("不同意")
+                        .setConfirmBtnText("同意")
+                        .setCancelBtnText("不同意")
                         .setUrl("https://www.baidu.com")
                         .build()
-                        .setDialogResultListener(new BHCBaseDialogFragment.DialogResultListener() {
+                        .setDialogConfirmListener(new BHCBaseDialogFragment.DialogConfirmListener() {
                             @Override
                             public void result(Object result) {
 
                             }
                         })
-                        .setDialogDismissListener(new BHCBaseDialogFragment.DialogDismissListener() {
+                        .setDialogCancelListener(new BHCBaseDialogFragment.DialogCancelListener() {
                             @Override
                             public void dismiss() {
 
@@ -89,19 +89,19 @@ public class TestDialogActivity extends AppCompatActivity {
                 BHCCommonConfirmDialog dialog = BHCCommonConfirmDialog.newConfirmBuilder()
                         .setCanceledOnTouchOutside(true)
                         .setTitle("提示")//标题不设置默认隐藏
-                        .setLeftText("暂不更新")
-                        .setRightText("立即更新")
+                        .setCancelBtnText("暂不更新")
+                        .setConfirmBtnText("立即更新")
                         .setMessage("发现新版本")
                         .build();
                 //点击确认回调监听
-                dialog.setDialogResultListener(new BHCBaseDialogFragment.DialogResultListener<String>() {
+                dialog.setDialogConfirmListener(new BHCBaseDialogFragment.DialogConfirmListener<String>() {
                     @Override
                     public void result(String result) {
                         Toast.makeText(TestDialogActivity.this, "你点击了立即更新", Toast.LENGTH_SHORT).show();
                     }
                 })
                         //取消回调监听
-                        .setDialogDismissListener(new BHCBaseDialogFragment.DialogDismissListener() {
+                        .setDialogCancelListener(new BHCBaseDialogFragment.DialogCancelListener() {
                             @Override
                             public void dismiss() {
                                 Toast.makeText(TestDialogActivity.this, "你点击了暂不更新", Toast.LENGTH_SHORT).show();
@@ -118,12 +118,12 @@ public class TestDialogActivity extends AppCompatActivity {
             public void onClick(View v) {
                 BHCCommonConfirmDialog.newConfirmBuilder()
                         .setTitle("短标题")//标题不设置默认隐藏
-                        .setRightText("确认")
+                        .setConfirmBtnText("确认")
                         .setMessage("短内容")
                         .setIsShowLeftBtn(false)
                         .build()
-                        //点击确认/取消回调监听
-                        .setDialogResultListener(new BHCBaseDialogFragment.DialogResultListener<String>() {
+                        //点击确认回调监听
+                        .setDialogConfirmListener(new BHCBaseDialogFragment.DialogConfirmListener<String>() {
                             @Override
                             public void result(String result) {
                                 Toast.makeText(TestDialogActivity.this, "你点击了" + result, Toast.LENGTH_SHORT).show();
@@ -158,18 +158,12 @@ public class TestDialogActivity extends AppCompatActivity {
                         .setSize((int) (ScreenUtils.getScreenWidth(TestDialogActivity.this) * 0.8),
                                 DensityUtils.dip2px(TestDialogActivity.this, 200))
                         .build()
-                        .setDialogResultListener(new BHCBaseDialogFragment.DialogResultListener<String>() {
+                        .setDialogConfirmListener(new BHCBaseDialogFragment.DialogConfirmListener<String>() {
                             @Override
                             public void result(String result) {
                                 if (!TextUtils.isEmpty(result)) {
                                     Toast.makeText(TestDialogActivity.this, "你输入了：" + result, Toast.LENGTH_SHORT).show();
                                 }
-                            }
-                        })
-                        .setDialogDismissListener(new BHCBaseDialogFragment.DialogDismissListener() {
-                            @Override
-                            public void dismiss() {
-
                             }
                         })
                         .show(getSupportFragmentManager(), "inputDialog");
@@ -188,7 +182,7 @@ public class TestDialogActivity extends AppCompatActivity {
                         .setSize((int) (ScreenUtils.getScreenWidth(TestDialogActivity.this) * 0.8),
                                 DensityUtils.dip2px(TestDialogActivity.this, 200))
                         .build()
-                        .setDialogResultListener(new BHCBaseDialogFragment.DialogResultListener<String>() {
+                        .setDialogConfirmListener(new BHCBaseDialogFragment.DialogConfirmListener<String>() {
                             @Override
                             public void result(String result) {
                                 if (!TextUtils.isEmpty(result)) {
@@ -196,7 +190,7 @@ public class TestDialogActivity extends AppCompatActivity {
                                 }
                             }
                         })
-                        .setDialogDismissListener(new BHCBaseDialogFragment.DialogDismissListener() {
+                        .setDialogCancelListener(new BHCBaseDialogFragment.DialogCancelListener() {
                             @Override
                             public void dismiss() {
 
@@ -215,7 +209,7 @@ public class TestDialogActivity extends AppCompatActivity {
                 final BHCCommonLoadingDialog loadingDialog = BHCCommonLoadingDialog.newBHCCommonLoadingDialog().build();
                 loadingDialog.show(getSupportFragmentManager(), "BHCCommonLoadingDialog");
 
-                if (loadingDialog.getDialog().isShowing()) {
+//                if (loadingDialog.getDialog().isShowing()) {
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
@@ -223,7 +217,7 @@ public class TestDialogActivity extends AppCompatActivity {
                         }
                     }, 2000);
                 }
-            }
+//            }
         });
 
 
@@ -236,13 +230,13 @@ public class TestDialogActivity extends AppCompatActivity {
                         .setSize((int) (ScreenUtils.getScreenWidth(TestDialogActivity.this) * 0.8),
                                 DensityUtils.dip2px(TestDialogActivity.this, 200))
                         .build()
-                        .setDialogResultListener(new BHCBaseDialogFragment.DialogResultListener<String>() {
+                        .setDialogConfirmListener(new BHCBaseDialogFragment.DialogConfirmListener<String>() {
                             @Override
                             public void result(String result) {
                                 Toast.makeText(TestDialogActivity.this, "你输入了：" + result, Toast.LENGTH_SHORT).show();
                             }
                         })
-                        .setDialogDismissListener(new BHCBaseDialogFragment.DialogDismissListener() {
+                        .setDialogCancelListener(new BHCBaseDialogFragment.DialogCancelListener() {
                             @Override
                             public void dismiss() {
                             }
@@ -261,13 +255,13 @@ public class TestDialogActivity extends AppCompatActivity {
                         .setYearStart(1992)
                         .setYearEnd(2050)
                         .build()
-                        .setDialogResultListener(new BHCBaseDialogFragment.DialogResultListener<Integer>() {
+                        .setDialogConfirmListener(new BHCBaseDialogFragment.DialogConfirmListener<Integer>() {
                             @Override
                             public void result(Integer result) {
                                 Toast.makeText(TestDialogActivity.this, "你输入了：" + result, Toast.LENGTH_SHORT).show();
                             }
                         })
-                        .setDialogDismissListener(new BHCBaseDialogFragment.DialogDismissListener() {
+                        .setDialogCancelListener(new BHCBaseDialogFragment.DialogCancelListener() {
                             @Override
                             public void dismiss() {
                             }
@@ -284,13 +278,13 @@ public class TestDialogActivity extends AppCompatActivity {
                         .setType("month")
                         .setSelectedMonth(3)
                         .build()
-                        .setDialogResultListener(new BHCBaseDialogFragment.DialogResultListener<Integer>() {
+                        .setDialogConfirmListener(new BHCBaseDialogFragment.DialogConfirmListener<Integer>() {
                             @Override
                             public void result(Integer result) {
                                 Toast.makeText(TestDialogActivity.this, "你输入了：" + result, Toast.LENGTH_SHORT).show();
                             }
                         })
-                        .setDialogDismissListener(new BHCBaseDialogFragment.DialogDismissListener() {
+                        .setDialogCancelListener(new BHCBaseDialogFragment.DialogCancelListener() {
                             @Override
                             public void dismiss() {
                             }
@@ -308,13 +302,13 @@ public class TestDialogActivity extends AppCompatActivity {
                         .setMonth(3)
                         .setSelectedDay(4)
                         .build()
-                        .setDialogResultListener(new BHCBaseDialogFragment.DialogResultListener<Integer>() {
+                        .setDialogConfirmListener(new BHCBaseDialogFragment.DialogConfirmListener<Integer>() {
                             @Override
                             public void result(Integer result) {
                                 Toast.makeText(TestDialogActivity.this, "你输入了：" + result, Toast.LENGTH_SHORT).show();
                             }
                         })
-                        .setDialogDismissListener(new BHCBaseDialogFragment.DialogDismissListener() {
+                        .setDialogCancelListener(new BHCBaseDialogFragment.DialogCancelListener() {
                             @Override
                             public void dismiss() {
                             }
@@ -336,13 +330,13 @@ public class TestDialogActivity extends AppCompatActivity {
                         .setType("common")
                         .setListData(data)
                         .build()
-                        .setDialogResultListener(new BHCBaseDialogFragment.DialogResultListener<String>() {
+                        .setDialogConfirmListener(new BHCBaseDialogFragment.DialogConfirmListener<String>() {
                             @Override
                             public void result(String result) {
                                 Toast.makeText(TestDialogActivity.this, "你输入了：" + result, Toast.LENGTH_SHORT).show();
                             }
                         })
-                        .setDialogDismissListener(new BHCBaseDialogFragment.DialogDismissListener() {
+                        .setDialogCancelListener(new BHCBaseDialogFragment.DialogCancelListener() {
                             @Override
                             public void dismiss() {
                             }

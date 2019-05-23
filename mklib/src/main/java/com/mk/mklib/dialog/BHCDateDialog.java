@@ -88,23 +88,23 @@ public class BHCDateDialog extends BHCBaseDialogFragment {
         btn_confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mDialogResultListener != null) {
+                if (mDialogConfirmListener != null) {
                     switch (type) {
                         case "date":
-                            mDialogResultListener.result(new SimpleDateFormat("yyyy-MM-dd")
+                            mDialogConfirmListener.result(new SimpleDateFormat("yyyy-MM-dd")
                                     .format(wheelDatePicker.getCurrentDate()));
                             break;
                         case "year":
-                            mDialogResultListener.result(wheelYearPicker.getCurrentYear());
+                            mDialogConfirmListener.result(wheelYearPicker.getCurrentYear());
                             break;
                         case "month":
-                            mDialogResultListener.result(wheelMonthPicker.getCurrentMonth());
+                            mDialogConfirmListener.result(wheelMonthPicker.getCurrentMonth());
                             break;
                         case "day":
-                            mDialogResultListener.result(wheelDayPicker.getCurrentDay());
+                            mDialogConfirmListener.result(wheelDayPicker.getCurrentDay());
                             break;
                         case "common":
-                            mDialogResultListener.result(data.get(wheelPicker.getCurrentItemPosition()));
+                            mDialogConfirmListener.result(data.get(wheelPicker.getCurrentItemPosition()));
                             break;
                     }
 
@@ -116,7 +116,7 @@ public class BHCDateDialog extends BHCBaseDialogFragment {
         btn_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mDialogDismissListener != null) {
+                if (mDialogCancelListener != null) {
                     dismiss();
                 }
             }

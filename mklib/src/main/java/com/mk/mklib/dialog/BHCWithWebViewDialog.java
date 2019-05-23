@@ -15,11 +15,12 @@ import com.mk.mklib.R;
 
 /**
  * created by mbm on 2019/5/6
+ * 带webview的弹框
  */
 public class BHCWithWebViewDialog extends BHCBaseDialogFragment {
 
-    private static final String LEFT_TEXT = "left_text";
-    private static final String RIGHT_TEXT = "right_text";
+    private static final String CONFIRM_BTN_TEXT = "confirm_btn_text";
+    private static final String CANCEL_BTN_TEXT = "cancle_btn_text";
     private static final String TITLE = "title";
     private static final String URL = "url";
 
@@ -41,24 +42,22 @@ public class BHCWithWebViewDialog extends BHCBaseDialogFragment {
             if (!TextUtils.isEmpty(getArguments().getString(TITLE))) {
                 titleTv.setText(getArguments().getString(TITLE));
             }
-            cancelBtn.setText(getArguments().getString(LEFT_TEXT));
+            cancelBtn.setText(getArguments().getString(CANCEL_BTN_TEXT));
             load(webView, getArguments().getString(URL));
         }
         cancelBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (mDialogDismissListener != null) {
-                    mDialogDismissListener.dismiss();
-                    dismiss();
-                }
+                dismiss();
+
             }
         });
-        confirmBtn.setText(getArguments().getString(RIGHT_TEXT));
+        confirmBtn.setText(getArguments().getString(CONFIRM_BTN_TEXT));
         confirmBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (mDialogResultListener != null) {
-                    mDialogResultListener.result(confirmBtn.getText().toString());
+                if (mDialogConfirmListener != null) {
+                    mDialogConfirmListener.result(confirmBtn.getText().toString());
                     dismiss();
                 }
             }
@@ -79,8 +78,8 @@ public class BHCWithWebViewDialog extends BHCBaseDialogFragment {
     private static BHCWithWebViewDialog getInstance(Builder builder) {
         BHCWithWebViewDialog dialog = new BHCWithWebViewDialog();
         Bundle bundle = getArgumentBundle(builder);
-        bundle.putString(LEFT_TEXT, builder.leftText);
-        bundle.putString(RIGHT_TEXT, builder.rightText);
+        bundle.putString(CANCEL_BTN_TEXT, builder.cancelBtnText);
+        bundle.putString(CONFIRM_BTN_TEXT, builder.confirmBtnText);
         bundle.putString(TITLE, builder.mTitle);
         bundle.putString(URL, builder.url);
         dialog.setArguments(bundle);
@@ -94,8 +93,8 @@ public class BHCWithWebViewDialog extends BHCBaseDialogFragment {
     public static class Builder extends BHCBaseDialogFragment.Builder<Builder, BHCWithWebViewDialog> {
         private String mTitle = "";
         private String url;
-        private String leftText = "";
-        private String rightText = "";
+        private String cancelBtnText = "";
+        private String confirmBtnText = "";
 
         public Builder setTitle(String title) {
             this.mTitle = title;
@@ -107,13 +106,13 @@ public class BHCWithWebViewDialog extends BHCBaseDialogFragment {
             return this;
         }
 
-        public Builder setLeftText(String leftText) {
-            this.leftText = leftText;
+        public Builder setCancelBtnText(String cancelBtnText) {
+            this.cancelBtnText = cancelBtnText;
             return this;
         }
 
-        public Builder setRightText(String rightText) {
-            this.rightText = rightText;
+        public Builder setConfirmBtnText(String confirmBtnText) {
+            this.confirmBtnText = confirmBtnText;
             return this;
         }
 
