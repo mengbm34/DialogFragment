@@ -90,7 +90,7 @@ public class TestDialogActivity extends AppCompatActivity {
                         .setCanceledOnTouchOutside(true)
                         .setTitle("提示")//标题不设置默认隐藏
                         .setCancelBtnText("暂不更新")
-                        .setConfirmBtnText("立即更新")
+                        .setConfirmBtnText(getResources().getString(R.string.app_name))
                         .setMessage("发现新版本")
                         .build();
                 //点击确认回调监听

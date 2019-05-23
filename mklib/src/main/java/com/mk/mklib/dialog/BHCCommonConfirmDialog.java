@@ -100,23 +100,23 @@ public class BHCCommonConfirmDialog extends BHCBaseDialogFragment {
         private String confirmBtnText = "确定";
         private Boolean isShowLeftBtn = true;
 
-        public Builder setTitle(String title) {
-            this.mTitle = title;
+        public <T> Builder setTitle(T title) {
+            this.mTitle = (String) title;
             return this;
         }
 
-        public Builder setMessage(String message) {
-            mMessage = message;
+        public <T> Builder setMessage(T message) {
+            mMessage = (String) message;
             return this;
         }
 
-        public Builder setCancelBtnText(String cancelBtnText) {
-            this.cancelBtnText = cancelBtnText;
+        public <T> Builder setCancelBtnText(T cancelBtnText) {
+            this.cancelBtnText = (String) cancelBtnText;
             return this;
         }
 
-        public Builder setConfirmBtnText(String confirmBtnText) {
-            this.confirmBtnText = confirmBtnText;
+        public <T> Builder setConfirmBtnText(T confirmBtnText) {
+            this.confirmBtnText = (String) confirmBtnText;
             return this;
         }
 

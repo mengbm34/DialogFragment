@@ -96,23 +96,23 @@ public class BHCWithWebViewDialog extends BHCBaseDialogFragment {
         private String cancelBtnText = "";
         private String confirmBtnText = "";
 
-        public Builder setTitle(String title) {
-            this.mTitle = title;
+        public <T> Builder setTitle(T title) {
+            this.mTitle = (String) title;
             return this;
         }
 
-        public Builder setUrl(String url) {
-            this.url = url;
+        public <T> Builder setUrl(T url) {
+            this.url = (String) url;
             return this;
         }
 
-        public Builder setCancelBtnText(String cancelBtnText) {
-            this.cancelBtnText = cancelBtnText;
+        public <T> Builder setCancelBtnText(T cancelBtnText) {
+            this.cancelBtnText = (String) cancelBtnText;
             return this;
         }
 
-        public Builder setConfirmBtnText(String confirmBtnText) {
-            this.confirmBtnText = confirmBtnText;
+        public <T> Builder setConfirmBtnText(T confirmBtnText) {
+            this.confirmBtnText = (String) confirmBtnText;
             return this;
         }
 

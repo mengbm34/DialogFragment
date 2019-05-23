@@ -44,23 +44,23 @@ public class BHCCommonInputDialog extends BHCBaseDialogFragment {
         private Boolean isShowLastEdit = false;
         private Boolean isShowSubTitle = false;
 
-        public Builder setHint(String hint) {
-            mHint = hint;
+        public <T> Builder setHint(T hint) {
+            mHint = (String) hint;
             return this;
         }
 
-        public Builder setHint1(String hint1) {
-            mHint1 = hint1;
+        public <T>Builder setHint1(T hint1) {
+            mHint1 = (String) hint1;
             return this;
         }
 
-        public Builder setTitle(String title) {
-            this.title = title;
+        public <T>Builder setTitle(T title) {
+            this.title = (String) title;
             return this;
         }
 
-        public Builder setSubTitle(String subTitle) {
-            this.subTitle = subTitle;
+        public <T> Builder setSubTitle(T subTitle) {
+            this.subTitle = (String) subTitle;
             return this;
         }
 
